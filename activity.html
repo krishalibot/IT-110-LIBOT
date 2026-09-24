@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTML Practical Application Activity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f2ede1;
+      --ink: #23211d;
+      --ink-soft: #55524a;
+      --rule: #cdc3ac;
+      --teal: #1f6f63;
+      --teal-deep: #14463e;
+      --gold: #b98a2e;
+      --code-bg: #e8dfc9;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      color: var(--ink);
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+      line-height: 1.65;
+    }
+
+    h1, h2, h3 {
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--teal-deep);
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin: 0 0 6px;
+    }
+
+    .subtitle {
+      color: var(--ink-soft);
+      font-style: italic;
+      margin: 0 0 40px;
+      max-width: 46ch;
+    }
+
+    nav {
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      padding: 14px 0;
+      margin-bottom: 56px;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 22px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+    }
+    nav a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+    nav a:hover { color: var(--teal); border-bottom-color: var(--teal); }
+
+    section { margin-bottom: 64px; }
+
+    section > h2 {
+      font-size: 1rem;
+      margin: 0 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--ink);
+      display: inline-block;
+    }
+
+    h3 {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      margin: 28px 0 10px;
+    }
+
+    p { margin: 0 0 16px; }
+
+    a { color: var(--teal); }
+    a:visited { color: var(--teal-deep); }
+
+    ul.link-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    ul.link-list li {
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--rule);
+    }
+    ul.link-list li:last-child { border-bottom: none; }
+    ul.link-list .kind {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    figure {
+      margin: 0 0 20px;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: flex-end;
+    }
+    img {
+      display: block;
+      max-width: 100%;
+      border: 1px solid var(--ink);
+    }
+    figcaption {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--ink-soft);
+      margin-top: 8px;
+    }
+
+    audio, video {
+      display: block;
+      width: 100%;
+      margin: 6px 0 10px;
+    }
+
+    blockquote {
+      margin: 0 0 20px;
+      padding: 4px 0 4px 20px;
+      border-left: 3px solid var(--gold);
+      color: var(--ink-soft);
+      font-style: italic;
+    }
+
+    abbr { text-decoration-color: var(--gold); }
+
+    mark {
+      background: none;
+      color: var(--teal-deep);
+      font-weight: 600;
+      box-shadow: inset 0 -0.4em 0 rgba(31, 111, 99, 0.22);
+    }
+
+    pre {
+      background: var(--code-bg);
+      padding: 14px 16px;
+      overflow-x: auto;
+      border-left: 3px solid var(--ink);
+      font-size: 0.85rem;
+    }
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--code-bg);
+      padding: 1px 5px;
+    }
+    pre code { background: none; padding: 0; }
+
+    .dom-box {
+      border: 1px dashed var(--ink-soft);
+      padding: 16px 18px;
+      margin: 0 0 20px;
+    }
+    .dom-box p { margin: 0; }
+
+    footer {
+      margin-top: 80px;
+      padding-top: 20px;
+      border-top: 1px solid var(--rule);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--ink-soft);
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="main-heading">HTML Practical Application Activity</h1>
+  <p class="subtitle">
+    A single page covering images, hyperlinks, multimedia, a few useful tags,
+    and a short look at the HTML DOM.
+  </p>
+
+  <nav>
+    <ul>
+      <li><a href="#images-section">Images</a></li>
+      <li><a href="#hyperlinks-section">Hyperlinks</a></li>
+      <li><a href="#multimedia-section">Multimedia</a></li>
+      <li><a href="#tags-section">Useful Tags</a></li>
+      <li><a href="#dom-section">HTML DOM</a></li>
+    </ul>
+  </nav>
+
+  <!-- 1. IMAGES                     -->
+  <section>
+    <h2 id="images-section">1. Images</h2>
+
+    <p>
+      Jump straight to the <a href="#multimedia-section">multimedia section</a>
+      &mdash; that's the internal link for this page.
+    </p>
+
+    <div class="gallery">
+      <figure>
+        <img
+          src="images/photo1.jpg"
+          alt="Illustrated painting of a large round bird seen from behind, with the word PATHETIC above it"
+          width="220"
+          height="311"
+        />
+        <figcaption>fig. 1 &mdash; captioned "Pathetic"</figcaption>
+      </figure>
+
+      <figure>
+        <img
+          src="images/photo2.jpg"
+          alt="Illustration of a black cat riding on the back of a great white shark jumping out of the ocean, with a sailing ship in the background"
+          width="260"
+        />
+        <figcaption>fig. 2</figcaption>
+      </figure>
+
+      <figure>
+        <img
+          src="images/photo3.jpg"
+          alt="Watercolor portrait illustration of a frog wearing a formal suit and tie"
+          width="200"
+        />
+        <figcaption>fig. 3</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 2. HYPERLINKS                 -->
+  <section>
+    <h2 id="hyperlinks-section">2. Hyperlinks</h2>
+
+    <ul class="link-list">
+      <li>
+        <span class="kind">internal / same page</span>
+        Jump down to the <a href="#dom-section">HTML DOM section</a>.
+      </li>
+      <li>
+        <span class="kind">external / new tab</span>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer">
+          MDN HTML Documentation
+        </a>
+      </li>
+      <li>
+        <span class="kind">email</span>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=krishamae.libot@gmail.com" target="_blank" rel="noopener noreferrer">krishamae.libot@gmail.com</a>
+      </li>
+      <li>
+        <span class="kind">anchor</span>
+        Jump to <a href="#tags-section">useful tags</a>.
+      </li>
+    </ul>
+  </section>
+
+  <!-- 3. MULTIMEDIA                 -->
+  <section>
+    <h2 id="multimedia-section">3. Multimedia</h2>
+
+    <h3>audio</h3>
+    <audio controls>
+      <source src="media/sample-audio.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element. You can
+      <a href="media/sample-audio.mp3">download the audio file</a> instead.
+    </audio>
+
+    <h3>video</h3>
+    <video controls>
+      <source src="media/sample-video.mp4" type="video/mp4" />
+      Your browser does not support the video element. You can
+      <a href="media/sample-video.mp4">download the video file</a> instead.
+    </video>
+  </section>
+
+  <!-- 4. USEFUL TAGS                -->
+  <section>
+    <h2 id="tags-section">4. Useful Tags</h2>
+
+    <!-- Used blockquote to set apart a quoted line of text from a source -->
+    <blockquote>
+      The Web does not just connect machines, it connects people. &mdash; Tim Berners-Lee
+    </blockquote>
+
+    <!-- Used abbr to give the full meaning of an abbreviation on hover -->
+    <p>
+      <abbr title="HyperText Markup Language">HTML</abbr> is the standard language
+      for creating web pages.
+    </p>
+
+    <!-- Used mark to highlight an important word in the sentence -->
+    <p>Remember to always add an <mark>alt attribute</mark> to every image.</p>
+
+    <!-- Used code and pre together to show a small snippet of example code -->
+    <pre><code>&lt;p&gt;Hello, world!&lt;/p&gt;</code></pre>
+
+    <!-- Used an HTML character entity to correctly display a copyright symbol -->
+    <p>&copy; 2026 Krishamae Libot.</p>
+  </section>
+
+  <!-- 5. HTML DOM                   -->
+  <section>
+    <h2 id="dom-section">5. HTML DOM</h2>
+
+    <p>
+      The HTML DOM represents this page as a tree of nested elements. The
+      <code>&lt;body&gt;</code> element, for instance, is the parent of every
+      heading, paragraph, and list on this page.
+    </p>
+
+    <div class="dom-box" id="dom-demo-parent">
+      <p id="dom-demo-child">
+        This paragraph has an id and sits inside a parent
+        <code>&lt;div&gt;</code>, which you can inspect using DevTools.
+      </p>
+    </div>
+
+  </section>
+
+  <footer>
+    <!--
+      In DevTools, the <div id="dom-demo-parent"> element is a direct
+      parent of the <p id="dom-demo-child"> paragraph, so the paragraph
+      appears one level deeper in the tree, nested inside the div. The
+      <nav> element is the parent of a single <ul>, which is itself the
+      parent of four <li> elements, one per navigation link, showing how
+      a list branches into repeated child items. Each <li> also has its
+      own <a> child, making the anchor a grandchild of <nav>. Zooming out
+      further, <body> is the shared ancestor of every element on the page,
+      including the <h1 id="main-heading"> heading, the nav, all five
+      numbered sections, and the footer, which is why collapsing <body> in
+      DevTools hides the entire page at once. This confirms the DOM is structured as a
+      single tree rooted at <html>, branching down through <body> into
+      sections, and finally into individual elements like the image
+      figures and the dom-demo-child paragraph.
+    -->
+  </footer>
+
+</body>
+</html>
