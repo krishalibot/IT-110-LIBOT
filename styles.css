@@ -1,0 +1,259 @@
+/* 
+    styles.css - CSS Hands-On Activity: Style Your Profile Card
+
+/* 
+    SECTION 1: RESET (universal selector)
+    */
+
+/* Box model: width and height include padding and border */
+* {
+    box-sizing: border-box;
+}
+
+/* Simple reset: remove the browser's default spacing */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* 
+    SECTION 2: BASE STYLES (type selectors)
+    */
+
+body {
+    font-family: Georgia, "Times New Roman", serif;  /* font-family */
+    font-size: 1rem;                                 /* rem unit */
+    background-color: #a99a86;                       /* color as a HEX code */
+    color: #393e37;
+    line-height: 1.5;
+}
+
+/* Grouping selector: h1 and h2 share the same base styles */
+h1, h2 {
+    font-weight: bold;
+    color: #393e37;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75em;                           /* em unit */
+}
+
+/*
+    CASCADE DEMO (Part A):
+    The grouped rule above sets h1, h2 to color #393e37.
+    The rule below ALSO targets the same h2 elements (inside a card).
+    The rule below WINS: ".card h2" has higher specificity (one class +
+    one type = 0,1,1) than "h2" (one type = 0,0,1).
+    Specificity beats order, so the card headings become #493e38.
+*/
+.card h2 {
+    color: #493e38;
+}
+
+/* Pseudo-element: add a decoration before every h2 */
+h2::before {
+    content: "\00BB  ";   /* a "»" symbol */
+    color: #5d5c46;
+}
+
+
+/* 
+    SECTION 3: LAYOUT (header, main, footer)
+    */
+
+header {
+    background-color: #393e37;
+    padding: 1.5rem 1rem;
+    margin-bottom: 24px;                             /* px unit */
+    text-align: center;                              /* centers header text */
+}
+
+/* The h1 sits on a dark background, so it needs light text.
+   "header h1" (0,0,2) beats "h1, h2" (0,0,1). */
+header h1 {
+    color: #d5d0cb;
+}
+
+main {
+    padding: 0 1rem;
+}
+
+footer {
+    margin-top: 2rem;
+    padding: 1rem;
+    color: #d5d0cb;
+    background-color: rgba(57, 62, 55, 0.9);         /* color as RGBA */
+    text-align: center;                              /* centers footer text */
+}
+
+
+/* 
+    SECTION 4: COMPONENTS
+    */
+
+/*  Navigation links  */
+nav {
+    margin-top: 0.75rem;
+}
+
+nav a {
+    display: inline-block;                           /* so padding/width work */
+    padding: 8px 16px;
+    margin: 0 4px;
+    color: #d5d0cb;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: rgba(213, 208, 203, 0.15);
+    border-radius: 20px;
+}
+
+/* Pseudo-class: hover effect */
+nav a:hover {
+    background-color: #a99a86;
+    color: #393e37;
+}
+
+/*  Card  */
+/*
+    TOTAL RENDERED WIDTH OF ONE .card (border-box):
+    Because of box-sizing: border-box, the width of 500px already
+    includes the padding and the border.
+    Total = 500px (width includes 20px + 20px padding and 2px + 2px border).
+*/
+.card {
+    width: 500px;
+    max-width: 100%;                                 /* % unit: shrinks on small screens */
+    padding: 20px;
+    border: 2px solid #5d5c46;                       /* width, style, color in one line */
+    border-radius: 12px;
+    background-color: #d5d0cb;
+    margin: 0 auto;                                  /* centers the card horizontally */
+    margin-bottom: 24px;                             /* space between cards */
+}
+
+/* Descendant selector: every <p> inside a .card */
+.card p {
+    margin-bottom: 0.75em;
+    text-align: left;
+}
+
+/* Class selector: the intro paragraph */
+.intro {
+    font-size: 1.15rem;
+    font-weight: bold;
+}
+
+/* Pseudo-element: style the first letter of the intro */
+.intro::first-letter {
+    font-size: 1.6em;
+    color: #5d5c46;
+}
+
+/* ID selector: #about stands out from the other cards */
+#about {
+    border-color: #493e38;
+    border-width: 4px;
+    position: relative;                              /* anchor for the badge */
+}
+
+/* Badge: positioned in the top-right corner of #about */
+#about::after {
+    content: "Hello!";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 2px 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;                                    /* color as a NAME */
+    background-color: #493e38;
+    border-radius: 12px;
+}
+
+/*  Skills list (flexbox)  */
+.skills-list {
+    display: flex;                                   /* flex container */
+    flex-wrap: wrap;
+    justify-content: center;                         /* lay items out in a row */
+    gap: 12px;                                       /* space between items */
+    list-style: none;
+}
+
+/* Child selector: only <li> directly inside .skills-list; styled like tags */
+.skills-list > li {
+    padding: 6px 14px;
+    font-size: 0.9rem;
+    color: white;
+    background-color: #5d5c46;
+    border-radius: 16px;
+}
+
+/*  Visibility  */
+.hide-none {
+    display: none;                                   /* removed from the page */
+}
+
+.hide-visibility {
+    visibility: hidden;                              /* invisible but still there */
+}
+
+/*
+    DIFFERENCE BETWEEN THE TWO HIDDEN PARAGRAPHS:
+    .hide-none (display: none) is removed from the layout completely,
+    so it takes up no space and the paragraphs below move up.
+    .hide-visibility (visibility: hidden) cannot be seen, but it still
+    occupies its space, so there is an empty gap in the Notes card.
+*/
+
+/*  Notes card (made shorter)  */
+#notes {
+  padding: 10px 20px 40px;                         /* extra bottom padding lifts the sentence away from the bottom edge */
+}
+
+#notes h2 {
+    margin-bottom: 0.3em;
+}
+
+#notes p {
+    margin-bottom: 0.2em;
+}
+
+/*  Scroll box (Hobbies card, made taller)  */
+.scroll-box {
+    height: 200px;                                   /* fixed height */
+    overflow: auto;                                  /* scrollbar when content is too long */
+}
+
+
+/* 
+    REFLECTION QUESTIONS
+
+    1. Why did one of the two conflicting rules win in Part A?
+        The rule ".card h2" won over "h1, h2" because it has higher
+        specificity: a class plus a type selector (0,1,1) outweighs a
+        single type selector (0,0,1). When specificity is different, the
+        order of the rules does not matter. Order only decides the winner
+        when both rules have the same specificity (then the later one wins).
+
+    2. Rendered width of one .card if box-sizing were content-box?
+        With content-box, the width only covers the content area, so the
+        padding and border are added on top:
+        500px (width) + 20px + 20px (left/right padding)
+        + 2px + 2px (left/right border) = 544px.
+        With border-box it stays at 500px.
+        (Note: #about has a 4px border, so its content-box total would be
+        548px; the 544px answer is for a regular card.)
+
+    3. When would I choose visibility: hidden instead of display: none?
+        I would use visibility: hidden when the element must be invisible
+        but the page layout should not shift, such as a placeholder or
+        an error message that appears later in the same spot. I would use
+        display: none when the element should be removed completely and
+        other elements should fill its space.
+    */
